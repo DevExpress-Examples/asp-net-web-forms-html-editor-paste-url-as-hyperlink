@@ -18,17 +18,11 @@
         var process = -1;
 
         function he_OnCommandExecuted(s, e) {
-            if (e.commandName === ASPxClientCommandConsts.KBPASTE_COMMAND) {
+            if (e.commandName === ASPxClientCommandConsts.KBPASTE_COMMAND || e.commandName === ASPxClientCommandConsts.PASTE_COMMAND) 
                 process = 0;
-                return;
-            }
-            if (e.commandName === ASPxClientCommandConsts.PASTE_COMMAND) {
-                process = 0;
-                return;
-            }
         }
         function he_OnHtmlChanged(s, e) {
-            if (!ASPxClientUtils.ie && process === 0) {
+            if (process === 0) {
                 process = -1;
                 var text = s.GetHtml();
                 s.SetHtml("");
