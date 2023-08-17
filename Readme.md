@@ -9,7 +9,7 @@
 **[[Run Online]](https://codecentral.devexpress.com/e4325/)**
 <!-- run online end -->
 
-<p>To paste a URL to [ASPxHtmlEditor](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor) as a hyperlink, follow the steps below:
+To paste a URL to [ASPxHtmlEditor](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor) as a hyperlink, follow the steps below:
 
 1. Subscribe to [CommandExecuted](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.CommandExecuted) and [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) events.
 
@@ -21,17 +21,17 @@
 
 2. In the [CommandExecuted](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.CommandExecuted) event handler, check if the `PASTE` command is executed and set the `process` flag.
   
-  ```js
-  function he_OnCommandExecuted(s, e) {
+   ```js
+   function he_OnCommandExecuted(s, e) {
       if (e.commandName === ASPxClientCommandConsts.KBPASTE_COMMAND || e.commandName === ASPxClientCommandConsts.PASTE_COMMAND) 
           process = 0;
-  }
-  ```
+   }
+   ```
 
 3. In the [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) event handler, check the `process` flag. If it indicates a paste process, get an HTML code from the editor and replace each URL with the corresponding hyperlink in the HTML format.
    
-  ```js
-  function he_OnHtmlChanged(s, e) {
+   ```js
+   function he_OnHtmlChanged(s, e) {
       if (process === 0) {
           process = -1;
           var text = s.GetHtml();
@@ -39,8 +39,8 @@
           var newText = text.replace(/(?:(https?:\/\/[\/\w\.\,\-\?\=\&\%\+\#\&&amp;]*[^&lt;^&lt;a\s^\)]\/?))(?=<br>|\&nbsp|<\/div>|$|\)|\s|\))/g, "<a href=\"$1\">$1</a>");
           s.ExecuteCommand(ASPxClientCommandConsts.PASTEHTML_COMMAND, newText);
       }
-  }
-  ```
+   }
+   ```
 
 ## Files to Review
 
