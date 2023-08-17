@@ -18,7 +18,7 @@ To paste a URL to [ASPxHtmlEditor](https://docs.devexpress.com/AspNet/DevExpress
     </dx:ASPxHtmlEditor>
     ```
 
-2. In the [CommandExecuted](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.CommandExecuted) event handler, check if the `PASTE` command is executed and set the `process` flag.
+2. In the [CommandExecuted](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.CommandExecuted) event handler, check if the `PASTE` command is executed.
   
     ```js
     function he_OnCommandExecuted(s, e) {
