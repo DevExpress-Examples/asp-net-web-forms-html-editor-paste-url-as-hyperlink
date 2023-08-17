@@ -12,19 +12,24 @@
 <p>To paste a URL to [ASPxHtmlEditor](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor) as a hyperlink, follow the steps below:
 
 1. Subscribe to [CommandExecuted](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.CommandExecuted) and [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) events.
+
    ```aspx
-  <dx:ASPxHtmlEditor ID="he" runat="server">
+   <dx:ASPxHtmlEditor ID="he" runat="server">
       <ClientSideEvents HtmlChanged="he_OnHtmlChanged" CommandExecuted="he_OnCommandExecuted" />
-  </dx:ASPxHtmlEditor>
+   </dx:ASPxHtmlEditor>
    ```
+
 2. In the [CommandExecuted](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.CommandExecuted) event handler, check if the `PASTE` command is executed and set the `process` flag.
+  
   ```js
   function he_OnCommandExecuted(s, e) {
       if (e.commandName === ASPxClientCommandConsts.KBPASTE_COMMAND || e.commandName === ASPxClientCommandConsts.PASTE_COMMAND) 
           process = 0;
   }
   ```
-2. In the [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) event handler, check the `process` flag. If it indicates a paste process, get an HTML code from the editor and replace each URL with the corresponding hyperlink in the HTML format.
+
+3. In the [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) event handler, check the `process` flag. If it indicates a paste process, get an HTML code from the editor and replace each URL with the corresponding hyperlink in the HTML format.
+   
   ```js
   function he_OnHtmlChanged(s, e) {
       if (process === 0) {
