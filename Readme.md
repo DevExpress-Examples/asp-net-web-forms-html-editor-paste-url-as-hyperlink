@@ -1,21 +1,45 @@
 <!-- default badges list -->
-![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/128545109/13.1.4%2B)
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E4325)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
 
-* [Default.aspx](./CS/WebSite/Default.aspx) (VB: [Default.aspx](./VB/WebSite/Default.aspx))
-<!-- default file list end -->
-# How to paste URL to ASPxHtmlEditor as a hyperlink
+# HTML Editor for ASP.NET Web Forms - How to paste a URL as a hyperlink
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e4325/)**
 <!-- run online end -->
 
+To paste a URL to [ASPxHtmlEditor](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor) as a hyperlink, follow the steps below:
 
-<p>To paste URL to ASPxHtmlEditor as a hyperlink, you can handle client-side <a href="http://documentation.devexpress.com/#AspNet/DevExpressWebASPxHtmlEditorScriptsASPxClientHtmlEditor_CommandExecutedtopic"><u>ASPxClientHtmlEditor.CommandExecuted</u></a> and <a href="http://documentation.devexpress.com/#AspNet/DevExpressWebASPxHtmlEditorScriptsASPxClientHtmlEditor_HtmlChangedtopic"><u>ASPxClientHtmlEditor.HtmlChanged</u></a> events. In the CommandExecuted event handler check the command name. If it is ASPxClientCommandConsts.KBPASTE_COMMAND or ASPxClientCommandConsts.PASTE_COMMAND, get html from ASPxHtmlEditor in the HtmlChanged event handler and replace each URL with the corresponding hyperlink in HTML format.</p><p>Please note that in this example we didn’t change the ASPxHtmlEditor behavior for Internet Explorer because this browser wraps URLs in hyperlink in HTML format by default.</p>
+1. Subscribe to [CommandExecuted](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.CommandExecuted) and [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) events.
 
-<br/>
+    ```aspx
+    <dx:ASPxHtmlEditor ID="he" runat="server">
+        <ClientSideEvents HtmlChanged="he_OnHtmlChanged" CommandExecuted="he_OnCommandExecuted" />
+    </dx:ASPxHtmlEditor>
+    ```
 
+2. In the [CommandExecuted](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.CommandExecuted) event handler, check if the `PASTE` command is executed.
+  
+    ```js
+    function he_OnCommandExecuted(s, e) {
+        if (e.commandName === ASPxClientCommandConsts.KBPASTE_COMMAND || e.commandName === ASPxClientCommandConsts.PASTE_COMMAND) 
+            process = 0;
+    }
+    ```
 
+3. In the [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) event handler, obtain HTML code from the editor and replace each URL with the corresponding hyperlink in the HTML format.
+   
+    ```js
+    function he_OnHtmlChanged(s, e) {
+        if (process === 0) {
+            process = -1;
+            var text = s.GetHtml();
+            s.SetHtml("");
+            var newText = text.replace(/(?:(https?:\/\/[\/\w\.\,\-\?\=\&\%\+\#\&&amp;]*[^&lt;^&lt;a\s^\)]\/?))(?=<br>|\&nbsp|<\/div>|$|\)|\s|\))/g, "<a href=\"$1\">$1</a>");
+            s.ExecuteCommand(ASPxClientCommandConsts.PASTEHTML_COMMAND, newText);
+       }
+    }
+    ```
+## Files to Review
+
+* [Default.aspx](./CS/WebSite/Default.aspx) (VB: [Default.aspx](./VB/WebSite/Default.aspx))
