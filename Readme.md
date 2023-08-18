@@ -6,7 +6,7 @@
 
 # HTML Editor for ASP.NET Web Forms - How to paste a URL as a hyperlink
 <!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/e4325/)**
+**[[Run Online]](https://codecentral.devexpress.com/128545109/)**
 <!-- run online end -->
 
 To paste a URL to [ASPxHtmlEditor](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor) as a hyperlink, follow the steps below:
