@@ -27,7 +27,7 @@ To paste a URL to [ASPxHtmlEditor](https://docs.devexpress.com/AspNet/DevExpress
     }
     ```
 
-3. In the [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) event handler, get an HTML code from the editor and replace each URL with the corresponding hyperlink in the HTML format.
+3. In the [HtmlChanged](https://docs.devexpress.com/AspNet/js-ASPxClientHtmlEditor.HtmlChanged) event handler, obtain HTML code from the editor and replace each URL with the corresponding hyperlink in the HTML format.
    
     ```js
     function he_OnHtmlChanged(s, e) {
